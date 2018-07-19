@@ -9,9 +9,15 @@ urlpatterns = [
     # Home page 
     url(r'^$', views.index, name='index'),
 
-    # Show all topics
+    # Show all medications
     url(r'^medications/$', views.topics, name='medications'),
 
-    # Page for adding new topics
+    # Show information for a single medication
+    url(r'^medications/(?P<topic_id>\d+)/$', views.topic, name='medication'),
+
+    # Page for adding new medications
     url(r'^new_medication/$', views.new_topic, name='new_medication'),
+
+    # Page with team member information
+    url(r'^support/$', views.support, name='support'),
 ]

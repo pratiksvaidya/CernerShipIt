@@ -37,9 +37,11 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
                             <li><a>Hello, {{ user.username }}.</a></li>
+                            <li><a href="{% url 'learning_logs:support' %}">Support</a></li>
                             <li><a href="{% url 'users:logout' %}">Logout</a></li>
                         {% else %}
                             <li><a href="{% url 'users:register' %}">Register</a></li>
+                            <li><a href="{% url 'learning_logs:support' %}">Support</a></li>
                             <li><a href="{% url 'users:login' %}">Login</a></li>
                         {% endif %}
                     </ul>

@@ -8,7 +8,7 @@ from .forms import TopicForm
 
 # Create your views here.
 def index(request):
-    """The home page for Learning Log"""
+    """The home page for Silver Fix"""
     return render(request, 'learning_logs/index.html')
 
 @login_required
@@ -20,15 +20,15 @@ def topics(request):
 
 @login_required
 def topic(request, topic_id):
-    """Show a single topic and all its entries"""
-    topic = get_object_or_404(Topic, id=topic_id)
+    """Show a single medication and all its entries"""
+    medication = get_object_or_404(Topic, id=topic_id)
     
     # Make sure the topic belongs to the current user.
-    if topic.owner != request.user:
+    if medication.owner != request.user:
         raise Http404
 
-    entries = topic.entry_set.order_by('-date_added')
-    context = {'topic': topic, 'entries': entries}
+    # entries = topic.entry_set.order_by('-date_added')
+    context = {'topic': topic, 'entries': medication}
     return render(request, 'learning_logs/topic.html', context)
 
 @login_required
@@ -48,3 +48,7 @@ def new_topic(request):
 
     context = {'form': form}
     return render(request, 'learning_logs/new_topic.html', context)
+
+def support(request):
+    """ The support page for Silver Fix """
+    return render(request, 'learning_logs/support.html')
