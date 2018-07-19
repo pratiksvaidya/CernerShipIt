@@ -13,6 +13,7 @@ class Topic(models.Model):
     price = models.FloatField(default=0)
     dose = models.FloatField(default=0)
     dose_units = models.CharField(max_length=100, default=None)
+    pill_count = models.IntegerField(default=0)
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
     expiration_date = models.DateField(default=timezone.now)

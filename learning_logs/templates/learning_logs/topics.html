@@ -12,6 +12,7 @@
             <tr>
                 <th>Medication</th>
                 <th>Dose</th>
+                <th>Pill Count</th>
                 <th>Prescriber</th>
                 <th>Pharmacy</th>
                 <th>Price</th>
@@ -24,6 +25,7 @@
             <tr>
                 <td>{{ topic.name }}</td>
                 <td>{{ topic.dose }} {{ topic.dose_units }}</td>
+                <td>{{ topic.pill_count }}</td>
                 <td>{{ topic.prescriber }}</td>
                 <td>{{ topic.pharmacy }}</td>
                 <td>${{ topic.price|floatformat:2 }}</td>
