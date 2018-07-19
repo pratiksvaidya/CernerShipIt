@@ -30,7 +30,9 @@
                 <td>{{ topic.expiration_date }}</td>
                 <td>
                     <a href="{% url 'learning_logs:refill' topic.id %}">
-                        <button type="button" class="btn btn-danger btn-sm">Expired</button>
+                        <button type="button" class="btn btn-{{ topic.expiration_status }} btn-sm">
+                            {{ topic.expiration_text }}
+                        </button>
                     </a>
                 </td>
             </tr>

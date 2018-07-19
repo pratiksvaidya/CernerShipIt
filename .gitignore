@@ -6,3 +6,4 @@ lib/
 bin/
 .idea/
 include/
+learning_logs/secrets.py
