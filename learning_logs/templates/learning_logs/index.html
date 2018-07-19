@@ -1,0 +1,14 @@
+{% extends "learning_logs/base.html" %}
+
+{% block header %}
+    <div class="jumbotron">
+        <h1>Track your Prescriptions.</h1>
+    </div>
+{% endblock header %}
+
+{% block content %}
+    <h2>
+        <a href="{% url 'users:register' %}">Register an account</a> to make 
+        your own Prescription Log, and list the medications you're currently taking.
+    </h2>
+{% endblock content %}

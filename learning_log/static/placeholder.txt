@@ -1,0 +1,1 @@
+Ensures that learning_log/static/ will be added to the project. Dir used by Django to collect static files.
