@@ -29,7 +29,7 @@
                         data-toggle="collapse" data-target="#navbar"
                         aria-expanded="false" aria-controls="navbar">
                     </button>
-                  <a class="navbar-brand"><img src="{% static "learning_logs/Cerner_RGB_Standard_%20horizontal-1.png" %}" width ="100px"></a>
+                  <a class="navbar-brand" href="{% url 'learning_logs:index' %}"><img src="{% static "learning_logs/Cerner_RGB_Standard_%20horizontal-1.png" %}" width ="100px"></a>
                 </div>
 
                 <div id="navbar" class="navbar-collapse collapse">
@@ -37,7 +37,7 @@
                 <div class="text-primary"></div>
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
-                            <li><a>Hello, {{ user.username }}.</a></li>
+                            <li><a>Welcome back, {{ user.username }}.</a></li>
                             <li><a href="{% url 'learning_logs:medications' %}"><header>Medications</header></a></li>
                             <li><a href="{% url 'learning_logs:support' %}">Support</a></li>
                             <li><a href="{% url 'users:logout' %}">Logout</a></li>
@@ -60,8 +60,9 @@
             </div>
         </div> <!-- /container -->
     </body>
-<div class="footer">
-  <p>Footer</p>
+    
+<div class="footer text-center">
+  <p>Copyright © 2018 Cerner Corporation.  All Rights Reserved.</p>
 </div>
 
 </html>
