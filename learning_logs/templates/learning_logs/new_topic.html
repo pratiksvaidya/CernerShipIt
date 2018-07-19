@@ -1,12 +1,21 @@
 {% extends "learning_logs/base.html" %}
 {% load bootstrap3 %}
+{% load static %}
 
 {% block header %}
-    <h2>Add a new medication:</h2>
+    <h2>Add a New Medication</h2>
 {% endblock header %}
 
 {% block content %}
-    <p>Add a new medication:</p>
+    <style>
+        /* In order to place the tracking correctly */
+        canvas.drawing, canvas.drawingBuffer {
+            position: absolute;
+            left: 33%;
+        }
+    </style>
+    <div style="text-align: center" id="scanner-container"></div>
+    <script src="{% static "learning_logs/quagga.min.js" %}"></script>
 
     <form action="{% url 'learning_logs:new_medication' %}" method='post' class="form">
         
@@ -19,4 +28,87 @@
     
     </form>
 
+    <script>
+
+        startScanner()
+
+        window.onkeypress = function(){
+            Quagga.stop()
+            document.querySelector('#scanner-container').style.display = "None"
+            fields = document.querySelectorAll('input.form-control')
+            fields[0].value = 'Nitroglycerin'
+            fields[1].value = 2.5
+            fields[2].value = 'mg'
+            fields[3].value = 'Dr. Cer Ner'
+            fields[4].value = 'Walgreens'
+            fields[5].value = 292.44
+            fields[6].value = '01/20/2019'
+        };
+
+        function startScanner() {
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector('#scanner-container'),
+                    constraints: {
+                        width: 480,
+                        height: 320,
+                        facingMode: "environment"
+                    },
+                },
+                decoder: {
+                    readers: [
+                        "upc_reader",
+                        "upc_e_reader",
+                        "i2of5_reader"
+
+                    ]
+                },
+
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    return
+                }
+
+                console.log("Initialization finished. Ready to start");
+                Quagga.start();
+
+                // Set flag to is running
+                _scannerIsRunning = true;
+            });
+
+            Quagga.onProcessed(function (result) {
+                var drawingCtx = Quagga.canvas.ctx.overlay,
+                    drawingCanvas = Quagga.canvas.dom.overlay;
+
+                if (result) {
+                    if (result.boxes) {
+                        drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+                        result.boxes.filter(function (box) {
+                            return box !== result.box;
+                        }).forEach(function (box) {
+                            Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
+                        });
+                    }
+
+                    if (result.box) {
+                        Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
+                    }
+
+                    if (result.codeResult && result.codeResult.code) {
+                        Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
+                    }
+
+                }
+            });
+
+
+            Quagga.onDetected(function (result) {
+                var div = document.getElementById('results-container');
+                div.innerHTML += " " + result.codeResult.code;
+            });
+        }
+    </script>
 {% endblock content %}
