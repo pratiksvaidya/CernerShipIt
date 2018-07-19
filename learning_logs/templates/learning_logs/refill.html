@@ -1,0 +1,55 @@
+{% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+    <h2>{{ medication.name }}</h2>
+    <a href="{% url 'learning_logs:medications'%}">Back to Medications</a>
+{% endblock header %}
+
+{% block content %}
+    <div class="container">
+    <h4>Medication Details</h4>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Medication</th>
+                <th>Dose</th>
+                <th>Prescriber</th>
+                <th>Pharmacy</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ medication.name }}</td>
+                <td>{{ medication.dose }} {{ medication.dose_units }}</td>
+                <td>{{ medication.prescriber }}</td>
+                <td>{{ medication.pharmacy }}</td>
+                <td>${{ medication.price|floatformat:2 }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h4>Local Pharmacies</h4>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Medication Cost</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pharmacy in pharmacies %}
+                <tr>
+                    <td>{{ pharmacy.name }}</td>
+                    <td>{{ pharmacy.formatted_address }}</td>
+                    <td>${{ pharmacy.price|floatformat:2 }}</td>
+                </tr>
+            {% empty %}
+                <p>Unfortunately, we are unable to find any local pharmacies.</p>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

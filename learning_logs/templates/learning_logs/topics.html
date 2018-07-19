@@ -15,6 +15,8 @@
                 <th>Prescriber</th>
                 <th>Pharmacy</th>
                 <th>Price</th>
+                <th>Expiration Date</th>
+                <th>Refill Status</th>
             </tr>
             </thead>
             <tbody>
@@ -25,6 +27,12 @@
                 <td>{{ topic.prescriber }}</td>
                 <td>{{ topic.pharmacy }}</td>
                 <td>${{ topic.price|floatformat:2 }}</td>
+                <td>{{ topic.expiration_date }}</td>
+                <td>
+                    <a href="{% url 'learning_logs:refill' topic.id %}">
+                        <button type="button" class="btn btn-danger btn-sm">Expired</button>
+                    </a>
+                </td>
             </tr>
             {% empty %}
             <p>No medications have been added yet.</p>

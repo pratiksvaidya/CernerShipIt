@@ -15,6 +15,9 @@ urlpatterns = [
     # Show information for a single medication
     url(r'^medications/(?P<topic_id>\d+)/$', views.topic, name='medication'),
 
+    # Show information to refill a medication
+    url(r'^medications/refill/(?P<medication_id>\d+)/$', views.refill, name='refill'),
+
     # Page for adding new medications
     url(r'^new_medication/$', views.new_topic, name='new_medication'),
 

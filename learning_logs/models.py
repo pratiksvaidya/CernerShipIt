@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Topic(models.Model):
     """A topic the user is learning about"""
@@ -11,6 +12,7 @@ class Topic(models.Model):
     dose_units = models.CharField(max_length=100, default=None)
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
+    expiration_date = models.DateField(default=timezone.now)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

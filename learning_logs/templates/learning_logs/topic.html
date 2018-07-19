@@ -2,31 +2,30 @@
 {% load bootstrap3 %}
 
 {% block header %}
-    <h2>{{ entries.name }}</h2>
+    <h2>{{ medication.name }}</h2>
 {% endblock header %}
 
 {% block content %}
-
-    {{ entries }}
-
-{#    {% for entry in entries %}#}
-{#    <div class="panel panel-default">#}
-{#        <div class="panel-heading">#}
-{#            <h3>#}
-{#                {{ entry.date_added|date:'M d, Y H:i' }}#}
-{#                <small>#}
-{#                    <a href="{% url 'learning_logs:edit_entry' entry.id %}">#}
-{#                        Edit Entry#}
-{#                    </a>#}
-{#                </small>#}
-{#            </h3>#}
-{#        </div>#}
-{#        <div class="panel-body">#}
-{#            {{ entry.text | linebreaks }}#}
-{#        </div>#}
-{#    </div> <!-- panel -->#}
-{#    {% empty %}#}
-{#        There are no entries for this topic yet.#}
-{#    {% endfor %}#}
-
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Medication</th>
+                <th>Dose</th>
+                <th>Prescriber</th>
+                <th>Pharmacy</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ medication.name }}</td>
+                <td>{{ medication.dose }} {{ topic.dose_units }}</td>
+                <td>{{ medication.prescriber }}</td>
+                <td>{{ medication.pharmacy }}</td>
+                <td>${{ medication.price|floatformat:2 }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}
