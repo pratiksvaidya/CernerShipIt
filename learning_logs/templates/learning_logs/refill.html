@@ -8,12 +8,13 @@
 
 {% block content %}
     <div class="container">
-    <h4>Medication Details</h4>
+        <h4>Medication Details</h4>
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>Medication</th>
                 <th>Dose</th>
+                <th>Pill Count</th>
                 <th>Prescriber</th>
                 <th>Pharmacy</th>
                 <th>Price</th>
@@ -23,6 +24,7 @@
             <tr>
                 <td>{{ medication.name }}</td>
                 <td>{{ medication.dose }} {{ medication.dose_units }}</td>
+                <td>{{ medication.pill_count }}</td>
                 <td>{{ medication.prescriber }}</td>
                 <td>{{ medication.pharmacy }}</td>
                 <td>${{ medication.price|floatformat:2 }}</td>
@@ -31,25 +33,38 @@
         </table>
 
         <h4>Local Pharmacies</h4>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Medication Cost</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for pharmacy in pharmacies %}
-                <tr>
-                    <td>{{ pharmacy.name }}</td>
-                    <td>{{ pharmacy.formatted_address }}</td>
-                    <td>${{ pharmacy.price|floatformat:2 }}</td>
-                </tr>
-            {% empty %}
-                <p>Unfortunately, we are unable to find any local pharmacies.</p>
-            {% endfor %}
-            </tbody>
-        </table>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for pharmacy in pharmacies %}
+                        <tr>
+                            <td>{{ pharmacy.name }}</td>
+                            <td>{{ pharmacy.formatted_address }}</td>
+                            <td>${{ pharmacy.price|floatformat:2 }}</td>
+                        </tr>
+                    {% empty %}
+                        <p>Unfortunately, we are unable to find any local pharmacies.</p>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-4">
+                <iframe class="mt-5" height="450" frameborder="0" style="border:0; margin: 36px 25px;"
+                        src="https://www.google.com/maps/embed/v1/search?q=pharmacies%20near%2064108&key=AIzaSyCepfMHD
+                             _ULvlooKtq0kjOydyr06e_MjCs">
+
+                </iframe>
+            </div>
+        </div>
+
     </div>
 {% endblock content %}

@@ -53,6 +53,7 @@ def new_topic(request):
     context = {'form': form}
     return render(request, 'learning_logs/new_topic.html', context)
 
+@login_required
 def refill(request, medication_id):
     """Show refill options for a specific medication"""
     medication = get_object_or_404(Topic, id=medication_id)
