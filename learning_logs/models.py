@@ -35,7 +35,7 @@ class Topic(models.Model):
         elif datetime.now().date() > self.expiration_date - timedelta(days=15):
             return 'Expiring'
         else:
-            return 'Current'
+            return 'Valid'
 
     def __str__(self):
         """Return a string representation of the model"""
