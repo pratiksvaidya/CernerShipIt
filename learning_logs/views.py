@@ -56,7 +56,7 @@ def new_topic(request):
     return render(request, 'learning_logs/new_topic.html', context)
 
 @login_required
-def refill(request, medication_id):
+def refill(request, zip_code, medication_id):
     """Show refill options for a specific medication"""
     medication = get_object_or_404(Topic, id=medication_id)
 
@@ -72,7 +72,7 @@ def refill(request, medication_id):
 
     def show_pharmacies():
         gmaps = googlemaps.Client(key=secrets.GOOGLE_API)
-        geocode_result = gmaps.geocode('64108')
+        geocode_result = gmaps.geocode(zip_code)
         coords = geocode_result[0]['geometry']['location']
         pharmacies_results = gmaps.places(query='', location=coords, type='pharmacy', radius=5)['results']
 
@@ -81,7 +81,7 @@ def refill(request, medication_id):
 
         return sorted(pharmacies_results, key=lambda k: k['price'])
 
-    context = {'medication': medication, 'pharmacies': show_pharmacies()}
+    context = {'medication': medication, 'pharmacies': show_pharmacies(), 'zip_code': zip_code}
     return render(request, 'learning_logs/refill.html', context)
 
 def support(request):

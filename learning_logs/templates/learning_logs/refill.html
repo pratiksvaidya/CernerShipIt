@@ -36,6 +36,12 @@
 
         <h4 class="tp-2">Local Pharmacies</h4>
 
+        <div class="input-group input-group-sm col-xs-3">
+            <span class="input-group-addon">Zip Code</span>
+            <input type="text" class="form-control" placeholder="ex. 64108">
+            <span class="input-group-btn"><button id='search' type="button" class="btn btn-default">Go</button></span>
+        </div>
+
         <div class="row">
             <div class="col-lg-8">
                 <table class="table table-striped">
@@ -61,11 +67,20 @@
             </div>
             <div class="col-lg-4" style="text-align:center">
                 <iframe class="mt-5" height="450" frameborder="0" style="border:0; margin: 36px 25px;"
-                        src="https://www.google.com/maps/embed/v1/search?q=pharmacies%20near%2064108&key=AIzaSyCepfMHD
+                        src="https://www.google.com/maps/embed/v1/search?q=pharmacies%20near%20{{ zip_code }}&key=AIzaSyCepfMHD
                              _ULvlooKtq0kjOydyr06e_MjCs">
                 </iframe>
             </div>
         </div>
 
     </div>
+
+    <script>
+    document.querySelector('#search').addEventListener('click', function() {
+        zip_code = document.querySelector('input').value;
+        if (!zip_code) { zip_code = '64108' };
+        document.location.pathname = 'medications/refills/' + zip_code + '/' + {{ medication.id }};
+    });
+
+    </script>
 {% endblock content %}

@@ -32,7 +32,7 @@
                         <td>${{ topic.price|floatformat:2 }}</td>
                         <td>{{ topic.expiration_date }}</td>
                         <td>
-                            <a href="{% url 'learning_logs:refill' topic.id %}">
+                            <a href="{% url 'learning_logs:refill' 64108 topic.id %}">
                                 <button type="button" class="btn btn-{{ topic.expiration_status }} btn-sm">
                                     {{ topic.expiration_text }}
                                 </button>
