@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
+
 from django.contrib.auth.decorators import login_required
 
 from .models import Topic
+from .forms import ContactForm
 from .forms import TopicForm
 
 from learning_logs import secrets
@@ -13,13 +15,13 @@ import random
 
 # Create your views here.
 def index(request):
-    """The home page for Silver Fix"""
+    """The home page for Silver"""
     return render(request, 'learning_logs/index.html')
 
 @login_required
 def topics(request):
     """Show all medications."""
-    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+    topics = Topic.objects.filter(owner=request.user).order_by('expiration_date')
     context = {'topics': topics }
     return render(request, 'learning_logs/topics.html', context)
 
@@ -83,5 +85,18 @@ def refill(request, medication_id):
     return render(request, 'learning_logs/refill.html', context)
 
 def support(request):
-    """ The support page for Silver Fix """
-    return render(request, 'learning_logs/support.html')
+    """The support page for Silver"""
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            # try:
+            #     send_mail(subject, message, email, ['admin@example.com'])
+            # except BadHeaderError:
+            #     return HttpResponse('Invalid header found.')
+            return render(request, 'learning_logs/support.html', {'success': True, 'form': ContactForm()})
+    return render(request, 'learning_logs/support.html', {'form': form})

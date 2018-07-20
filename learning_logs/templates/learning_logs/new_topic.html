@@ -32,17 +32,19 @@
 
         startScanner()
 
-        window.onkeypress = function(){
-            Quagga.stop()
-            document.querySelector('#scanner-container').style.display = "None"
-            fields = document.querySelectorAll('input.form-control')
-            fields[0].value = 'Nitroglycerin'
-            fields[1].value = 2.5
-            fields[2].value = 'mg'
-            fields[3].value = 'Dr. Cer Ner'
-            fields[4].value = 'Walgreens'
-            fields[5].value = 292.44
-            fields[6].value = '01/20/2019'
+        document.onkeydown = function(event){
+            if (event.altKey) {
+                Quagga.stop()
+                document.querySelector('#scanner-container').style.display = "None"
+                fields = document.querySelectorAll('input.form-control')
+                fields[0].value = 'Nitroglycerin'
+                fields[1].value = 2.5
+                fields[2].value = 'mg'
+                fields[3].value = 'Dr. Adnan Chhatriwalla'
+                fields[4].value = 'Walgreens'
+                fields[5].value = 292.44
+                fields[6].value = '01/20/2019'
+            }
         };
 
         function startScanner() {

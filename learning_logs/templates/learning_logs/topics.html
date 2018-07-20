@@ -7,44 +7,50 @@
 
 {% block content %}
     <div class="container">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Medication</th>
-                <th>Dose</th>
-                <th>Pill Count</th>
-                <th>Prescriber</th>
-                <th>Pharmacy</th>
-                <th>Price</th>
-                <th>Expiration Date</th>
-                <th>Refill Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for topic in topics %}
-            <tr>
-                <td>{{ topic.name }}</td>
-                <td>{{ topic.dose }} {{ topic.dose_units }}</td>
-                <td>{{ topic.pill_count }}</td>
-                <td>{{ topic.prescriber }}</td>
-                <td>{{ topic.pharmacy }}</td>
-                <td>${{ topic.price|floatformat:2 }}</td>
-                <td>{{ topic.expiration_date }}</td>
-                <td>
-                    <a href="{% url 'learning_logs:refill' topic.id %}">
-                        <button type="button" class="btn btn-{{ topic.expiration_status }} btn-sm">
-                            {{ topic.expiration_text }}
-                        </button>
-                    </a>
-                </td>
-            </tr>
-            {% empty %}
-            <p>No medications have been added yet.</p>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Medication</th>
+                        <th>Dose</th>
+                        <th>Pill Count</th>
+                        <th>Prescriber</th>
+                        <th>Pharmacy</th>
+                        <th>Price</th>
+                        <th>Expiration Date</th>
+                        <th>Refill Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for topic in topics %}
+                    <tr>
+                        <td>{{ topic.name }}</td>
+                        <td>{{ topic.dose }} {{ topic.dose_units }}</td>
+                        <td>{{ topic.pill_count }}</td>
+                        <td>{{ topic.prescriber }}</td>
+                        <td>{{ topic.pharmacy }}</td>
+                        <td>${{ topic.price|floatformat:2 }}</td>
+                        <td>{{ topic.expiration_date }}</td>
+                        <td>
+                            <a href="{% url 'learning_logs:refill' topic.id %}">
+                                <button type="button" class="btn btn-{{ topic.expiration_status }} btn-sm">
+                                    {{ topic.expiration_text }}
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <p>No medications have been added yet.</p>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <h3><a href="{% url 'learning_logs:new_medication' %}">Add a New Medication</a></h3>
+    <a href="{% url 'learning_logs:new_medication' %}">
+        <button type="button" class="btn btn-primary btn-lg">
+            Add a New Medication
+        </button>
+    </a>
 
 {% endblock content %}

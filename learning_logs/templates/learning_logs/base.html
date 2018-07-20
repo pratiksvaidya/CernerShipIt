@@ -9,13 +9,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Silver Fix</title>
+        <title>Silver</title>
 
         <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
         {% bootstrap_css %}
         {% bootstrap_javascript %}
         <link rel="stylesheet" type="text/css" href="{% static "learning_logs/footer.css" %}">
-
     </head>
 
 
@@ -52,18 +51,16 @@
         </nav>
 
         <div class="container">
-        <div class="container-sp">
-            <div class="page-header">
-                {% block header %} {% endblock header %}
-            </div>
-            <div>
-                {% block content %} {% endblock content %}
+            <div class="container-sp">
+                <div class="page-header">
+                    {% block header %} {% endblock header %}
+                </div>
+                <div>
+                    {% block content %} {% endblock content %}
+                </div>
             </div>
         </div>
-        </div> <!-- /container -->
-    <div class="holder">
-    </div>
-
+        <div class="holder"></div>
     </body>
 
 <div class="footer text-center">

@@ -7,26 +7,27 @@
 
 {% block content %}
     <div class="container">
+        <div class=""
         <table class="table table-striped">
             <thead>
-            <tr>
-                <th>Medication</th>
-                <th>Dose</th>
-                <th>Pill Count</th>
-                <th>Prescriber</th>
-                <th>Pharmacy</th>
-                <th>Price</th>
-            </tr>
+                <tr>
+                    <th>Medication</th>
+                    <th>Dose</th>
+                    <th>Pill Count</th>
+                    <th>Prescriber</th>
+                    <th>Pharmacy</th>
+                    <th>Price</th>
+                </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>{{ medication.name }}</td>
-                <td>{{ medication.dose }} {{ topic.dose_units }}</td>
-                <td>{{ medication.pill_count }}</td>
-                <td>{{ medication.prescriber }}</td>
-                <td>{{ medication.pharmacy }}</td>
-                <td>${{ medication.price|floatformat:2 }}</td>
-            </tr>
+                <tr>
+                    <td>{{ medication.name }}</td>
+                    <td>{{ medication.dose }} {{ topic.dose_units }}</td>
+                    <td>{{ medication.pill_count }}</td>
+                    <td>{{ medication.prescriber }}</td>
+                    <td>{{ medication.pharmacy }}</td>
+                    <td>${{ medication.price|floatformat:2 }}</td>
+                </tr>
             </tbody>
         </table>
     </div>

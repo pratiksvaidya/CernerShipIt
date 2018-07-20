@@ -1,18 +1,31 @@
 {% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
 {% load static %}
 
 {% block header %}
-        <h1>Contact Us</h1>
+    <h2>Contact Us</h2>
 {% endblock header %}
 
 {% block content %}
-  <div class="info-text"></div>
-  <p>
+    <div class="info-text"></div>
+    <p>
         Hello welcome to Silver the all in one application to save you money and protect your body from potentially toxic
-    medications. We strive hard to give all users the best user experiance possible. If you are having any techincal
-    difficulties, need to ask questions about the site or just want to send use a thought on how to impove your experiance
-    while on our site just drop us a message below!
-  </p>
-  </div>
+        medications. We strive hard to give all users the best user experiance possible. If you are having any techincal
+        difficulties, need to ask questions about the site or just want to send use a thought on how to impove your experiance
+        while on our site just drop us a message below!
+    </p>
+    </div>
+    {% if success %}
+        <div class="alert alert-success">
+            <strong>Thank you!</strong> We'll be in touch shortly.
+        </div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+    </form>
 
 {% endblock content %}
