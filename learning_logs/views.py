@@ -64,8 +64,10 @@ def refill(request, zip_code, medication_id):
     if medication.owner != request.user:
         raise Http404
 
-    def get_price(id, orig_price):
-        random.seed(id)
+    def get_price(pharm_id, medication):
+        random.seed(pharm_id + medication_id)
+
+        orig_price = medication.price
 
         buffer = orig_price*0.2
         return random.uniform(orig_price-buffer, orig_price+buffer)
@@ -77,7 +79,7 @@ def refill(request, zip_code, medication_id):
         pharmacies_results = gmaps.places(query='', location=coords, type='pharmacy', radius=5)['results']
 
         for pharmacy in pharmacies_results:
-            pharmacy['price'] = get_price(pharmacy['id'], medication.price)
+            pharmacy['price'] = get_price(pharmacy['id'], medication)
 
         return sorted(pharmacies_results, key=lambda k: k['price'])
 
