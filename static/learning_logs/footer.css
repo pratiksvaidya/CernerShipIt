@@ -1,0 +1,50 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #499ccf;
+    color: white;
+    text-align: right;
+    padding-top: 10px;
+    padding-right: 15px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #499ccf; !important;
+    font-weight: bold; !important;
+
+}
+
+.words{
+    padding-top: 45px;
+}
+
+.navbar-brand {
+    margin-bottom: 10px;
+}
+
+.navbar-nav>li>a {
+    padding-top: 20px; !important;
+    padding-bottom: 15px;
+}
+.lower-bar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #499ccf;
+    color: white;
+    text-align: right;
+    padding-top: 10px;
+    padding-right: 15px;
+}
+.container-sp{
+    margin-bottom: 80px;
+}
+.info-text{
+    text-align: justify;
+}
+.holder {
+
+}
