@@ -19,6 +19,8 @@
                         <th>Prescriber</th>
                         <th>Pharmacy</th>
                         <th>Price</th>
+                        <th>Expiration Date</th>
+                        <th>Prescription Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +31,14 @@
                         <td>{{ medication.prescriber }}</td>
                         <td>{{ medication.pharmacy }}</td>
                         <td>${{ medication.price|floatformat:2 }}</td>
+                        <td>{{ medication.expiration_date }}</td>
+                        <td>
+                            <strong>
+                                <span class="text-{{ medication.expiration_status }}">
+                                    {{ medication.expiration_text }}
+                                </span>
+                            </strong>
+                        </td>
                     </tr>
                 </tbody>
             </table>
