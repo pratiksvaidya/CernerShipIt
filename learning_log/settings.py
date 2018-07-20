@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'k8mpo*wz_sms%5evio7bcm(-y2yri$l)isfv2i*skeg9b5iczv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost']
 
@@ -147,7 +147,7 @@ if cwd == '/app' or cwd[:4] == '/tmp':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     # Allow all host headers.
-    ALLOWED_HOSTS = ['pv-journal.herokuapp.com']
+    ALLOWED_HOSTS = ['silver-cerner.herokuapp.com']
     DEBUG = False
 
     # Static asset configuration
