@@ -8,10 +8,9 @@ from .models import Topic
 from .forms import ContactForm
 from .forms import TopicForm
 
-from learning_logs import secrets
-
 import googlemaps
 import random
+import os
 
 # Create your views here.
 def index(request):
@@ -73,7 +72,7 @@ def refill(request, zip_code, medication_id):
         return random.uniform(orig_price-buffer, orig_price+buffer)
 
     def show_pharmacies():
-        gmaps = googlemaps.Client(key=secrets.GOOGLE_API)
+        gmaps = googlemaps.Client(key=os.getenv('GOOGLE_PLACES_API'))
         geocode_result = gmaps.geocode(zip_code)
         coords = geocode_result[0]['geometry']['location']
         pharmacies_results = gmaps.places(query='', location=coords, type='pharmacy', radius=5)['results']
